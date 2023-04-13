@@ -14,6 +14,7 @@ const {
   errorHandler,
 } = require("./middlewares/common/errorHandler");
 const authRouter = require("./routes/authRouter");
+const expenseRouter = require("./routes/expenseRouter");
 
 /**
  * express app
@@ -63,6 +64,11 @@ app.get("/", (req, res) => {
  * auth routes
  */
 app.use("/user", authRouter);
+
+/**
+ * expense routes
+ */
+app.use("/expense", expenseRouter);
 
 /**
  * 404 not found handler
