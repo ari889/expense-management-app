@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .alert{
+        @apply flex flex-row justify-between items-center px-5 py-2 rounded border;
+    }
+    .alert-danger{
+        @apply bg-red-300 text-red-950 border-red-400;
+    }
+    .alert-danger button{
+        @apply text-red-950;
+    }
+}
