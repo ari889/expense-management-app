@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { authLogout } from '../../redux/auth/actions';
 import { expenseLogout } from '../../redux/expense/actions';
 
@@ -9,6 +9,7 @@ const Header = () => {
     const auth = useAuth();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const userAuth = useSelector(state => state.auth);
 
     const logout = () => {
         dispatch(authLogout());
@@ -25,6 +26,9 @@ const Header = () => {
                     <ul className="flex flex-row justify-between items-center">
                         <li>
                             <NavLink to="/expense-management" className="px-3 py-1 transition delay-75 rounded hover:bg-gray-200">Expenase Management</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={`/user/${userAuth?.user?.id}`} className="px-3 py-1 transition delay-75 rounded hover:bg-gray-200"><i className='fas fa-user-circle me-2'></i>{userAuth?.user?.name}</NavLink>
                         </li>
                     </ul>
                 )}

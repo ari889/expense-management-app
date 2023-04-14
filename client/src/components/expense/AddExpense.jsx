@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Alert from '../Alert';
 import axios from '../../utils/axios';
 import { addExpense } from '../../redux/expense/actions';
@@ -17,6 +17,7 @@ const initialState = {
 const AddExpense = () => {
     const [state, setState] = useState(initialState);
     const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
 
     const handleOnChange = (event) => {
         setState({
@@ -30,7 +31,8 @@ const AddExpense = () => {
         axios.post('/expense/create', {
             name: state.name,
             type: state.type,
-            amount: state.amount
+            amount: state.amount,
+            user: auth.user.id
         }).then(response => {
             const obj = {
                 name: response.data.name,

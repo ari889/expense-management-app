@@ -19,7 +19,7 @@ const initialState = {
 const Login = () => {
     const [state, setState] = useState(initialState);
     const navigate = useNavigate();
-    const diapatch = useDispatch();
+    const dispatch = useDispatch();
 
     const handleOnChange = (event) => {
         setState({
@@ -44,7 +44,7 @@ const Login = () => {
                 user: response.data.user,
                 token: response.data.token
             };
-            diapatch(setAuth(obj));
+            dispatch(setAuth(obj));
             localStorage.setItem("EMA_", response.data.token);
             navigate('/expense-management');
         }).catch(err => {

@@ -36,7 +36,7 @@ router.post(
 /**
  * get all expenses
  */
-router.get("/all", checkLogin, getAllExpnese);
+router.get("/all/:id", checkLogin, getAllExpnese);
 
 /**
  * delete expense

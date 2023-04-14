@@ -1,16 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Expense from './Expense'
-import { useDispatch, useSelector } from 'react-redux'
-import fetchAllExpnese from '../../redux/expense/thunk/fetchAllExpense';
+import { useSelector } from 'react-redux';
 
 const ExpenseTable = () => {
     const expenses = useSelector(state => state.expense.expenses);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(fetchAllExpnese);
-    }, [dispatch]);
-
     return (
         <div className="relative overflow-x-auto">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

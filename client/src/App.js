@@ -10,6 +10,7 @@ import ExpenseManagent from "./components/pages/ExpenseManagent";
 import PrivateOutlet from "./components/PrivateOutlet";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { useEffect } from "react";
+import Profile from "./components/pages/Profile";
 
 function App() {
   const token = localStorage.getItem("EMA_");
@@ -33,6 +34,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/*" element={<PrivateOutlet />}>
               <Route path="expense-management" element={<ExpenseManagent />} />
+              <Route path="user/:id" element={<Profile />} />
             </Route>
           </Routes>
         </Layout>

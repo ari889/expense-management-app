@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { useDispatch } from 'react-redux'
+import { setAuth } from '../../redux/auth/actions'
 
 const initialState = {
     name: "",
@@ -16,6 +18,7 @@ const initialState = {
 const Register = () => {
     const [state, setState] = useState(initialState);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleOnChange = (event) => {
         setState({
@@ -38,6 +41,11 @@ const Register = () => {
         }
         axios.post('/user/register', obj).then(response => {
             setState(initialState);
+            const obj = {
+                user: response.data.user,
+                token: response.data.token
+            };
+            dispatch(setAuth(obj));
             localStorage.setItem("EMA_", response.data.token);
             navigate('/expense-management');
         }).catch(err => {

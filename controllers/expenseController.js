@@ -17,6 +17,7 @@ const create = async (req, res) => {
     res.status(201).json({
       message: "Expense added!",
       responseStatus: "success",
+      user: result.user,
       name: result.name,
       type: result.type,
       amount: result.amount,
@@ -38,7 +39,8 @@ const create = async (req, res) => {
  */
 const getAllExpnese = async (req, res) => {
   try {
-    const expenses = await Expense.find().select([
+    const id = req.params.id;
+    const expenses = await Expense.find({ user: id }).select([
       "name",
       "type",
       "amount",
