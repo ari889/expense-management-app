@@ -5,7 +5,6 @@ const useAuth = () => {
   if (!isExpired) {
     return true;
   } else {
-    localStorage.removeItem("EMA_");
     return false;
   }
 };

@@ -9,6 +9,7 @@ import { setAuth } from "./redux/auth/actions";
 import ExpenseManagent from "./components/pages/ExpenseManagent";
 import PrivateOutlet from "./components/PrivateOutlet";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { useEffect } from "react";
 
 function App() {
   const token = localStorage.getItem("EMA_");

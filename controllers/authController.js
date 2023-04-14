@@ -40,6 +40,7 @@ const register = async (req, res) => {
 
     res.status(201).json({
       message: "User was added successfully!",
+      user: userObject,
       token,
     });
   } catch (error) {
@@ -78,6 +79,7 @@ const login = async (req, res) => {
 
         res.status(201).json({
           message: "Login successful!",
+          user: userObject,
           token,
         });
       } else {

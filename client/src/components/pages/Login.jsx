@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../Alert';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '../../redux/auth/actions';
 
 /**
  * initial state
@@ -17,6 +19,7 @@ const initialState = {
 const Login = () => {
     const [state, setState] = useState(initialState);
     const navigate = useNavigate();
+    const diapatch = useDispatch();
 
     const handleOnChange = (event) => {
         setState({
@@ -37,6 +40,11 @@ const Login = () => {
         }
         axios.post('/user/login', obj).then(response => {
             setState(initialState);
+            const obj = {
+                user: response.data.user,
+                token: response.data.token
+            };
+            diapatch(setAuth(obj));
             localStorage.setItem("EMA_", response.data.token);
             navigate('/expense-management');
         }).catch(err => {
@@ -58,7 +66,7 @@ const Login = () => {
     return (
         <div className="w-96 mx-auto bg-gray-100 my-10 p-10 rounded shadow">
             <form onSubmit={handleSubmit}>
-                {state?.errors?.common?.msg && <Alert message={state?.errors?.common?.msg} />}
+                {state?.errors?.common?.msg && <Alert message={state?.errors?.common?.msg} type="error" />}
                 <label htmlFor="email" className="text-base block mb-2">
                     Email
                 </label>

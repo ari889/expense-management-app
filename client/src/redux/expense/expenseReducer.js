@@ -1,7 +1,10 @@
-import { ADD_EXPENSE, ALL_EXPENSES, DELETE } from "./actionTypes";
+import { ADD_EXPENSE, ALL_EXPENSES, DELETE, LOGOUT } from "./actionTypes";
 
 const initialState = {
   expenses: [],
+  message: "",
+  status: "",
+  from: "",
 };
 
 const expenseReducer = (state = initialState, action) => {
@@ -30,6 +33,11 @@ const expenseReducer = (state = initialState, action) => {
         expenses: state.expenses.filter(
           (expense) => expense._id !== action.payload
         ),
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        ...initialState,
       };
     default:
       return state;

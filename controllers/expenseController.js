@@ -16,6 +16,7 @@ const create = async (req, res) => {
 
     res.status(201).json({
       message: "Expense added!",
+      responseStatus: "success",
       name: result.name,
       type: result.type,
       amount: result.amount,

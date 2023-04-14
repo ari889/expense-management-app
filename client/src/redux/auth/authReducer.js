@@ -1,4 +1,4 @@
-import { SETAUTH } from "./actionTypes";
+import { LOGOUT, SETAUTH } from "./actionTypes";
 
 const initialState = {
   user: {},
@@ -12,6 +12,11 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: action.payload.user,
         token: action.payload.token,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        ...initialState,
       };
     default:
       return state;

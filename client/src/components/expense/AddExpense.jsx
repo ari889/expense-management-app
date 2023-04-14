@@ -10,6 +10,7 @@ const initialState = {
     amount: "",
     errors: {},
     message: "",
+    status: ""
 };
 
 
@@ -40,13 +41,14 @@ const AddExpense = () => {
             dispatch(addExpense(obj));
             setState({
                 ...initialState,
-                message: response.data.message
+                message: response.data.message,
+                status: response.data.status
             });
         })
             .catch(err => {
                 setState({
                     ...state,
-                    errors: err.data.errors,
+                    errors: err.response.data.errors,
                     loading: false
                 })
             });
@@ -54,8 +56,8 @@ const AddExpense = () => {
 
     return (
         <form onSubmit={handleSubmit} className="p-5">
-            {state?.errors?.common?.msg && <Alert message={state?.errors?.common?.msg} />}
-            {state?.message && <Alert message={state?.message} />}
+            {state?.errors?.common?.msg && <Alert message={state?.errors?.common?.msg} type="danger" />}
+            {state?.message && <Alert message={state?.message} type="success" />}
             <div className="mb-3">
                 <label htmlFor="name" className="text-base block mb-2">Name</label>
                 <input type="text" value={state.name} onChange={handleOnChange} id="name" name="name" className={`border-2 border-gray-300 px-5 py-2 outline-none rounded w-full ${state?.errors?.name ? 'border-red-500' : ''} focus:border-blue-400 transition delay-75 disabled:bg-gray-100`} />

@@ -1,8 +1,13 @@
-import axios from "../../../utils/axios";
+import axios from "axios";
 import { getExpenses } from "../actions";
 
 const fetchAllExpnese = (dispatch) => {
-  axios.get("/expense/all").then((response) => {
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("EMA_"),
+    },
+  };
+  axios.get("/expense/all", config).then((response) => {
     dispatch(getExpenses(response.data));
   });
 };
